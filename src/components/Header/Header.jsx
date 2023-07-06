@@ -1,7 +1,5 @@
 import { HeaderWrap } from './Header.style';
 
-const Header = ({ children, className }) => (
-  <HeaderWrap className={className}>{children}</HeaderWrap>
-);
+const Header = ({ children }) => <HeaderWrap>{children}</HeaderWrap>;
 
 export default Header;

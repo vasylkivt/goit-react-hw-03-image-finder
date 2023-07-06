@@ -1,22 +1,25 @@
 export const theme = {
   colors: {
-    accent: '#2A9D8F',
-    accentHover: '#10544f',
+    accent: '#44bd32',
+    // accentHover: '#10544f',
 
     black: '#000000',
     white: '#ffffff',
-    green: '#7cb518',
-    yellow: '#f3de2c',
-    red: '#fb6107',
+    green: '#4cd137',
+    yellow: '#fbc531',
+    red: '#e84118',
 
-    textColorLight: '#eae2b7',
-    textColorDark: '#003049',
-    titleColorLight: '#fefae0',
-    titleColorDark: '#264653',
-    backgroundColorLight: '#fefae0',
-    backgroundColorDark: '#003049',
+    textColorLight: '#f5f6fa',
+    textColorDark: '#2f3640',
+    titleColorLight: '#dcdde1',
+    titleColorDark: '#353b48',
+    backgroundColorLight: '#dcdde1',
+    backgroundColorDark: '#353b48',
+    backgroundColorButton: '#9a9ca4',
+    backgroundColorButtonHover: '#535863',
 
     linearGradient:
-      'radial-gradient(circle at 50% 50%, #F8F8F8 0%, #d5d2d2 100%)',
+      'radial-gradient(circle at 50% 50%, #f5f6fa 0%, #44bd32 100%)',
+    boxShadow: '0px 0px 10px 0px #44bd32',
   },
 };

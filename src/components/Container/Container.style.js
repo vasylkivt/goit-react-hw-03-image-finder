@@ -1,19 +1,18 @@
 import styled from 'styled-components';
 export const ContainerWrap = styled.div`
-  outline: 1px solid black;
-  background-color: aliceblue;
+  outline: 1px solid tomato;
 
-  width: 100%;
+  max-width: 320px;
   padding-right: 20px;
   padding-left: 20px;
   margin: 0 auto;
 
   @media screen and (min-width: 375px) {
-    width: 375px;
+    /* max-width: 335px; */
   }
 
   @media screen and (min-width: 768px) {
-    width: 768px;
+    max-width: 712px;
     padding-right: 28px;
     padding-left: 28px;
   }
@@ -21,6 +20,6 @@ export const ContainerWrap = styled.div`
   @media screen and (min-width: 1440px) {
     padding-right: 36px;
     padding-left: 36px;
-    width: 1440px;
+    max-width: 1368px;
   }
 `;
