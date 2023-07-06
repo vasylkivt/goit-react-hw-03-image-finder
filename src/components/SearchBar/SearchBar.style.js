@@ -16,6 +16,7 @@ export const SearchIcon = styled(RiSearch2Line)`
 `;
 
 export const SearchForm = styled(Form)`
+  position: absolute;
   display: flex;
   width: 100%;
   max-width: 335px;
@@ -95,5 +96,20 @@ export const Input = styled(Field)`
     font-size: 18px;
     padding-left: 28px;
     padding-right: 28px;
+  }
+`;
+
+export const ErrorsMessage = styled.div`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 40px;
+  color: ${({ theme: { colors } }) => colors.red};
+
+  font: inherit;
+  font-size: 14px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 18px;
   }
 `;

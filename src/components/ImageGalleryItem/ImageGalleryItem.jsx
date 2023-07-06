@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import { Image, Item } from './ImageGalleryItem.style';
-const ImageGalleryItem = ({ photos, showBackdrop }) => {
+const ImageGalleryItem = ({ photos, showModal }) => {
   return photos.map(({ largeImageURL, webformatURL, id, tags }) => {
     return (
       <Item key={id}>
         <Image
-          onClick={() => showBackdrop(largeImageURL)}
+          onClick={() => showModal(largeImageURL)}
           src={webformatURL}
           alt={tags}
         />
@@ -22,6 +22,6 @@ ImageGalleryItem.propTypes = {
       tags: PropTypes.string.isRequired,
     }).isRequired
   ).isRequired,
-  showBackdrop: PropTypes.func.isRequired,
+  showModal: PropTypes.func.isRequired,
 };
 export default ImageGalleryItem;

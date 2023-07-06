@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { fetchPhotosWithQuery } from 'services/api';
 
 import Loader from 'components/Loader/Loader';
@@ -8,22 +9,22 @@ import Header from 'components/Header/Header';
 import SearchBar from 'components/SearchBar/SearchBar';
 import ImageGallery from 'components/ImageGallery/ImageGallery';
 import ButtonLoadMore from 'components/Button/Button';
-import Backdrop from 'components/Modal/Modal';
+import Notification from 'components/Notification/Notification';
 
 export default class App extends Component {
   perPage = 12;
+
   state = {
     photos: [],
     isLoading: false,
     error: null,
-    query: '',
+    noPicturesFound: false,
+    query: null,
     page: 1,
     totalPage: 0,
-    showBackdrop: null,
-    largeImageURL: '',
   };
 
-  async componentDidUpdate(_, prevState) {
+  async componentDidUpdate(_, prevState, snapshot) {
     const { query, page } = this.state;
 
     if (prevState.query !== query || prevState.page !== page) {
@@ -37,6 +38,16 @@ export default class App extends Component {
     this.setState({ isLoading: true });
     try {
       const response = await fetchPhotosWithQuery(query, page);
+      if (response.hits.length === 0) {
+        this.setState({
+          noPicturesFound: true,
+        });
+        return;
+      } else {
+        this.setState({
+          noPicturesFound: false,
+        });
+      }
 
       const totalPage = response.totalHits / this.perPage;
       this.setState({
@@ -52,6 +63,14 @@ export default class App extends Component {
   }
 
   handlerSubmit = value => {
+    if (value.searchValue.trim() === '') {
+      return;
+    }
+
+    if (this.state.query === value.searchValue) {
+      return;
+    }
+
     this.setState(() => {
       return {
         query: value.searchValue,
@@ -70,26 +89,9 @@ export default class App extends Component {
     });
   };
 
-  showBackdrop = largeImageURL => {
-    this.setState({ showBackdrop: true, largeImageURL: largeImageURL });
-  };
-
-  closeBackdrop = evt => {
-    if (evt.currentTarget === evt.target) {
-      this.setState({ showBackdrop: false, largeImageURL: '' });
-    }
-  };
-
   render() {
-    const {
-      photos,
-      isLoading,
-      error,
-      page,
-      totalPage,
-      showBackdrop,
-      largeImageURL,
-    } = this.state;
+    const { photos, isLoading, error, page, totalPage, noPicturesFound } =
+      this.state;
 
     const isGalleryEmpty = photos.length === 0;
 
@@ -99,12 +101,23 @@ export default class App extends Component {
         <Header>
           <SearchBar onSubmit={this.handlerSubmit} />
         </Header>
+
+        {isGalleryEmpty && !noPicturesFound && (
+          <Notification>
+            ви можете скористатися пошуком для пошуку зображень
+          </Notification>
+        )}
+
+        {noPicturesFound && (
+          <Notification>за вашим запитом нічого не знайдено</Notification>
+        )}
+
+        {error && <Notification>щось трапилось спробуйте пізніше</Notification>}
         {!isGalleryEmpty && (
           <Section>
             <Container>
-              {error && <p>Whoops, something went wrong: {error.message}</p>}
-              <ImageGallery photos={photos} showBackdrop={this.showBackdrop} />
-              {isLoading && <Loader />}
+              <ImageGallery photos={photos} />
+
               {!isLoading && !isLastPage && !isGalleryEmpty && (
                 <ButtonLoadMore onClick={this.handlerLoadMore} />
               )}
@@ -112,12 +125,7 @@ export default class App extends Component {
           </Section>
         )}
 
-        {showBackdrop && (
-          <Backdrop
-            closeBackdrop={this.closeBackdrop}
-            largeImageURL={largeImageURL}
-          />
-        )}
+        {isLoading && <Loader />}
       </>
     );
   }
