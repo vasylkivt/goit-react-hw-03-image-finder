@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 export const ContainerWrap = styled.div`
-  outline: 1px solid tomato;
-
   max-width: 320px;
   padding-right: 20px;
   padding-left: 20px;

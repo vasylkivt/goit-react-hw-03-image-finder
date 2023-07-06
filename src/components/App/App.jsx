@@ -23,7 +23,7 @@ export default class App extends Component {
     largeImageURL: '',
   };
 
-  async componentDidUpdate(prevProps, prevState) {
+  async componentDidUpdate(_, prevState) {
     const { query, page } = this.state;
 
     if (prevState.query !== query || prevState.page !== page) {
@@ -34,8 +34,8 @@ export default class App extends Component {
   async updateGallery() {
     const { photos, query, page } = this.state;
 
+    this.setState({ isLoading: true });
     try {
-      this.setState({ isLoading: true });
       const response = await fetchPhotosWithQuery(query, page);
 
       const totalPage = response.totalHits / this.perPage;
@@ -99,16 +99,18 @@ export default class App extends Component {
         <Header>
           <SearchBar onSubmit={this.handlerSubmit} />
         </Header>
-        <Section>
-          <Container>
-            {error && <p>Whoops, something went wrong: {error.message}</p>}
-            <ImageGallery photos={photos} showBackdrop={this.showBackdrop} />
-            {isLoading && <Loader />}
-            {!isLastPage && !isGalleryEmpty && (
-              <ButtonLoadMore onClick={this.handlerLoadMore} />
-            )}
-          </Container>
-        </Section>
+        {!isGalleryEmpty && (
+          <Section>
+            <Container>
+              {error && <p>Whoops, something went wrong: {error.message}</p>}
+              <ImageGallery photos={photos} showBackdrop={this.showBackdrop} />
+              {isLoading && <Loader />}
+              {!isLoading && !isLastPage && !isGalleryEmpty && (
+                <ButtonLoadMore onClick={this.handlerLoadMore} />
+              )}
+            </Container>
+          </Section>
+        )}
 
         {showBackdrop && (
           <Backdrop

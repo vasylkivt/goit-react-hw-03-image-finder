@@ -1,8 +1,18 @@
 import React from 'react';
-import { LoaderText } from './Loader.style';
+import { FallingLines } from 'react-loader-spinner';
+import { LoaderWrap } from './Loader.style';
 
-const Loader = props => {
-  return <LoaderText>Loading...</LoaderText>;
+const Loader = () => {
+  return (
+    <LoaderWrap>
+      <FallingLines
+        color="#4fa94d"
+        width="200"
+        visible={true}
+        ariaLabel="falling-lines-loading"
+      />
+    </LoaderWrap>
+  );
 };
 
 export default Loader;

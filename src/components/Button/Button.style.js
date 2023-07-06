@@ -1,14 +1,20 @@
 import styled from 'styled-components';
 
 export const Button = styled.button`
-  padding: 8px 16px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 25px;
+  margin: 0 auto;
+  padding: 12px 20px;
   border-radius: 2px;
-  background-color: #3f51b5;
+  background-color: ${({ theme: { colors } }) => colors.backgroundColorButton};
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
-  display: inline-block;
-  color: #fff;
+  display: block;
+  color: ${({ theme: { colors } }) => colors.backgroundColorDark};
   border: 0;
+  border-radius: 25px;
   text-decoration: none;
   cursor: pointer;
   font-family: inherit;
@@ -22,6 +28,9 @@ export const Button = styled.button`
 
   &:hover,
   &:focus {
-    background-color: #303f9f;
+    color: ${({ theme: { colors } }) => colors.accent};
+    box-shadow: 0 0 10px 0 ${({ theme: { colors } }) => colors.accent};
+    background-color: ${({ theme: { colors } }) =>
+      colors.backgroundColorButtonHover};
   }
 `;
