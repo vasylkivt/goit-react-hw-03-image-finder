@@ -41,11 +41,13 @@ export default class App extends Component {
       if (response.hits.length === 0) {
         this.setState({
           noPicturesFound: true,
+          error: null,
         });
         return;
       } else {
         this.setState({
           noPicturesFound: false,
+          error: null,
         });
       }
 
@@ -58,7 +60,9 @@ export default class App extends Component {
     } catch (error) {
       this.setState({ error });
     } finally {
-      this.setState({ isLoading: false });
+      this.setState({
+        isLoading: false,
+      });
     }
   }
 
@@ -102,17 +106,22 @@ export default class App extends Component {
           <SearchBar onSubmit={this.handlerSubmit} />
         </Header>
 
-        {isGalleryEmpty && !noPicturesFound && (
-          <Notification>
-            ви можете скористатися пошуком для пошуку зображень
-          </Notification>
+        {isGalleryEmpty && !noPicturesFound && !error && (
+          <Notification>You can use the search to find images</Notification>
         )}
 
         {noPicturesFound && (
-          <Notification>за вашим запитом нічого не знайдено</Notification>
+          <Notification>
+            Sorry, there are no images matching your request. Please try again.
+          </Notification>
         )}
 
-        {error && <Notification>щось трапилось спробуйте пізніше</Notification>}
+        {error && (
+          <Notification>
+            Unfortunately, something went wrong. Please try again or reload the
+            page.
+          </Notification>
+        )}
         {!isGalleryEmpty && (
           <Section>
             <Container>

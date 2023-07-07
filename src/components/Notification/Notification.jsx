@@ -2,10 +2,10 @@
 
 import { Text } from './Notification.style';
 
-export default function Notification({ children, className }) {
+export default function Notification({ children }) {
   return (
     <>
-      <Text className={className}>{children}</Text>
+      <Text>{children}</Text>
     </>
   );
 }
@@ -13,6 +13,3 @@ export default function Notification({ children, className }) {
 // Notification.propTypes = {
 //   message: PropTypes.string.isRequired,
 // };
-
-//PiArrowBendUpRightBold
-//PiArrowBendUpLeftBold
