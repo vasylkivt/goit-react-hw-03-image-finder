@@ -10,6 +10,6 @@ export const LoaderWrap = styled.div`
   z-index: 999;
   width: 100vw;
   height: 100vh;
-  background-color: #000000;
+  background-color: ${({ theme: { colors } }) => colors.black};
   opacity: 0.5;
 `;

@@ -1,5 +1,3 @@
-// import PropTypes from 'prop-types';
-
 import { Text } from './Notification.style';
 
 export default function Notification({ children }) {
@@ -9,7 +7,3 @@ export default function Notification({ children }) {
     </>
   );
 }
-
-// Notification.propTypes = {
-//   message: PropTypes.string.isRequired,
-// };

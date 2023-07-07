@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { Image, Item } from './ImageGalleryItem.style';
+
 const ImageGalleryItem = ({ photos, showModal }) => {
   return photos.map(({ largeImageURL, webformatURL, id, tags }) => {
     return (
@@ -13,6 +14,9 @@ const ImageGalleryItem = ({ photos, showModal }) => {
     );
   });
 };
+
+export default ImageGalleryItem;
+
 ImageGalleryItem.propTypes = {
   photos: PropTypes.arrayOf(
     PropTypes.shape({
@@ -24,4 +28,3 @@ ImageGalleryItem.propTypes = {
   ).isRequired,
   showModal: PropTypes.func.isRequired,
 };
-export default ImageGalleryItem;

@@ -5,10 +5,6 @@ export const ContainerWrap = styled.div`
   padding-left: 20px;
   margin: 0 auto;
 
-  @media screen and (min-width: 375px) {
-    /* max-width: 335px; */
-  }
-
   @media screen and (min-width: 768px) {
     max-width: 712px;
     padding-right: 28px;

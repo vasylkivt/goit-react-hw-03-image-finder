@@ -25,7 +25,7 @@ export default class ImageGallery extends Component {
 
   galleryRef = React.createRef();
 
-  getSnapshotBeforeUpdate(prevProps, prevState) {
+  getSnapshotBeforeUpdate(prevProps) {
     if (prevProps.photos.length < this.props.photos.length) {
       const list = this.galleryRef.current;
 

@@ -11,8 +11,12 @@ import ImageGallery from 'components/ImageGallery/ImageGallery';
 import ButtonLoadMore from 'components/Button/Button';
 import Notification from 'components/Notification/Notification';
 
+const PER_PAGE = 12;
+//!
+const API_KEY = '36230302-a98b57dafca503e591043ee2d';
+
 export default class App extends Component {
-  perPage = 12;
+  perPage = PER_PAGE;
 
   state = {
     photos: [],
@@ -24,7 +28,7 @@ export default class App extends Component {
     totalPage: 0,
   };
 
-  async componentDidUpdate(_, prevState, snapshot) {
+  componentDidUpdate(_, prevState) {
     const { query, page } = this.state;
 
     if (prevState.query !== query || prevState.page !== page) {
@@ -37,7 +41,13 @@ export default class App extends Component {
 
     this.setState({ isLoading: true });
     try {
-      const response = await fetchPhotosWithQuery(query, page);
+      const response = await fetchPhotosWithQuery({
+        searchQuery: query,
+        page: page,
+        perPage: this.perPage,
+        apiKey: API_KEY,
+      });
+
       if (response.hits.length === 0) {
         this.setState({
           noPicturesFound: true,
